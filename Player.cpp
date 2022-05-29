@@ -6,9 +6,10 @@ void Player::setup(sf::Vector2f positionPlayer, size_t hp, float speed)
 	this->hp = hp;
 	this->speed = speed;
 	
-	gun.setup("pistol", 100);
+	gun.setup("pistol", 170);
 	playerSprite.setPosition(positionPlayer.x, positionPlayer.y);
 }
+
 void Player::control(sf::RenderWindow& window) noexcept
 {
 	const auto mouse = (sf::Vector2f)sf::Mouse::getPosition(window);
@@ -19,6 +20,7 @@ void Player::control(sf::RenderWindow& window) noexcept
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 		gun.shot(mouse, getCenterPosition());
 }
+
 void Player::draw(sf::RenderWindow& window)
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
@@ -32,8 +34,10 @@ void Player::draw(sf::RenderWindow& window)
 	gun.update();
 	gun.draw(window);
 }
+
+
 sf::Vector2f Player::getCenterPosition() noexcept
-{
+{  
 	auto bounds = playerSprite.getLocalBounds();
 	sf::Vector2f centerPos;
 	centerPos.x = positionPlayer.x + bounds.width / 2;
@@ -41,6 +45,7 @@ sf::Vector2f Player::getCenterPosition() noexcept
 
 	return centerPos;
 }
+
 void Player::loadFiled(std::filesystem::path playerAtlas, std::filesystem::path bulletTexture)
 {
 	if (!playerTexture.loadFromFile(playerAtlas.string()))
