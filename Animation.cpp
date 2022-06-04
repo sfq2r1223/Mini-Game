@@ -2,14 +2,15 @@
 
 namespace
 {
-	void requireValid(const sf::Sprite& sprite, Animation& animation)//Дописати!!!!!!!!!!!!!!!!!
+	void requireValid(const sf::Sprite& sprite, Animation& animation)
 	{
-		auto bounds = sprite.getLocalBounds();
+		const auto bounds = sprite.getLocalBounds();
 		float inMaxFrame;
 		sf::Vector2f inPositionOnAtlas;
 		inPositionOnAtlas.x = bounds.width;
 		inPositionOnAtlas.y = bounds.height;
 	}
+	//namespace
 }
 
 void Animation::setup(size_t delay, size_t maxFrame,

@@ -13,12 +13,12 @@ public:
 	~Player() = default;
 
 	void setup(sf::Vector2f positionPlayer, size_t hp, float speed);
-	void loadFiled(std::filesystem::path playerAtlas, std::filesystem::path bulletTexture);
+	void loadFiles(std::filesystem::path playerAtlas, std::filesystem::path bulletTexture);
 
-	void control(sf::RenderWindow& window) noexcept;
+	void control(sf::RenderWindow& window);
 	void draw(sf::RenderWindow& window);
 
-	sf::Vector2f getCenterPosition() noexcept;
+	sf::Vector2f getCenterPosition();
 private:
 	sf::Vector2f positionPlayer;
 	size_t hp = 0;

@@ -5,31 +5,37 @@
 sf::Sprite Bullet::bulletSprite;
 sf::Texture Bullet::bulletTexture;
 
-void Bullet::setup(sf::Vector2f position, sf::Vector2f positionTarget, float speed) noexcept
+void Bullet::setup(sf::Vector2f from, sf::Vector2f to, float speed)
 {
-	this->position = position;
+	this->from = from;
 	this->speed = speed;
 
-	diraction = positionTarget - position;
-	float length = sqrt(diraction.x * diraction.x + diraction.y * diraction.y);
+	diraction = to - from;
+	const float length = sqrtf(diraction.x * diraction.x + diraction.y * diraction.y);
 	diraction /= length;
 
-	bulletSprite.setPosition(position);
+	bulletSprite.setPosition(from);
 }
-void Bullet::update() 
+void Bullet::update(size_t timeLiveBullet, std::vector<Bullet>& chamber) 
 {
-	position += diraction;
-	bulletSprite.setPosition(position);
+	from += diraction;
+	bulletSprite.setPosition(from);
+
+	//if (clock() - lastLiveBullet >= timeLiveBullet)
+	//	for (size_t i = 0; i < chamber.size() - sizeof(chamber.begin()); ++i)
+	//	{
+	//		chamber.erase(chamber.begin());
+	//	}
 }
-void Bullet::draw(sf::RenderWindow& window) noexcept
+void Bullet::draw(sf::RenderWindow& window)
 {
-	bulletSprite.setPosition(position);
+	bulletSprite.setPosition(from);
 	window.draw(bulletSprite);
 }
-void Bullet::loadFiled(std::filesystem::path texture)
+void Bullet::loadFiles(std::filesystem::path pathTexture)
 {
-	if (!bulletTexture.loadFromFile(texture.string()))
-		throw std::runtime_error("Bullet::Error: failed loading file: " + texture.string());
+	if (!bulletTexture.loadFromFile(pathTexture.string()))
+		throw std::runtime_error("Bullet::Error: failed loading file: " + pathTexture.string());
 
 	bulletSprite.setTexture(bulletTexture);
 

@@ -6,19 +6,21 @@ void Player::setup(sf::Vector2f positionPlayer, size_t hp, float speed)
 	this->hp = hp;
 	this->speed = speed;
 	
-	gun.setup("pistol", 170);
+	gun.setup("pistol", 170, 2500);
 	playerSprite.setPosition(positionPlayer.x, positionPlayer.y);
 }
 
-void Player::control(sf::RenderWindow& window) noexcept
+void Player::control(sf::RenderWindow& window)
 {
-	const auto mouse = (sf::Vector2f)sf::Mouse::getPosition(window);
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 		playerSprite.move(speed, 0.f);
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 		playerSprite.move(-speed, 0.f);
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+	{
+		const auto mouse = (sf::Vector2f)sf::Mouse::getPosition(window);
 		gun.shot(mouse, getCenterPosition());
+	}
 }
 
 void Player::draw(sf::RenderWindow& window)
@@ -36,22 +38,23 @@ void Player::draw(sf::RenderWindow& window)
 }
 
 
-sf::Vector2f Player::getCenterPosition() noexcept
+sf::Vector2f Player::getCenterPosition()
 {  
-	auto bounds = playerSprite.getLocalBounds();
+	const auto playerPos = playerSprite.getPosition();
+	const auto bounds = playerSprite.getLocalBounds();
 	sf::Vector2f centerPos;
-	centerPos.x = positionPlayer.x + bounds.width / 2;
-	centerPos.y = positionPlayer.y + bounds.height / 2;
+	centerPos.x = playerPos.x + bounds.width / 2;
+	centerPos.y = playerPos.y + bounds.height / 2;
 
 	return centerPos;
 }
 
-void Player::loadFiled(std::filesystem::path playerAtlas, std::filesystem::path bulletTexture)
+void Player::loadFiles(std::filesystem::path pathPlayerAtlas, std::filesystem::path pathBulletTexture)
 {
-	if (!playerTexture.loadFromFile(playerAtlas.string()))
-		throw std::runtime_error("Player::Error: failed loading file " + playerAtlas.string());
+	if (!playerTexture.loadFromFile(pathPlayerAtlas.string()))
+		throw std::runtime_error("Player::Error: failed loading file " + pathPlayerAtlas.string());
 
-	gun.loadFiled(bulletTexture);
+	gun.loadFiles(pathBulletTexture);
 
 	runRight.setup(100, 6, sf::Vector2f(80, 94), sf::Vector2f(80, 94));
 	runLeft.setup(100, 6, sf::Vector2f(80, 94), sf::Vector2f(80, 94));

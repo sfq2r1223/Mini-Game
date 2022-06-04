@@ -7,19 +7,22 @@ class Bullet
 {
 public:
 	Bullet() = default;
+	~Bullet() = default;
 
-	void setup(sf::Vector2f position, sf::Vector2f positionTarget, float speed) noexcept;
-	void update();
+	void setup(sf::Vector2f from, sf::Vector2f to, float speed);
+	void update(size_t timeLiveBullet, std::vector<Bullet>& magazine);
 
-	void draw(sf::RenderWindow& window) noexcept;
-	static void loadFiled(std::filesystem::path texture);
+	void draw(sf::RenderWindow& window);
+	static void loadFiles(std::filesystem::path pathTexture);
 
 private:
-	sf::Vector2f position;
+	sf::Vector2f from;
 	sf::Vector2f diraction;
+
+	size_t lastLiveBullet = 0;
 
 	static sf::Sprite bulletSprite;
 	static sf::Texture bulletTexture;
 
-	size_t speed = 0;
+	float speed = 0;
 };

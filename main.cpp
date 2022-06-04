@@ -17,7 +17,7 @@ int main()
 
 		Player player;
 
-		player.loadFiled(playerAtlas, bulletTexture);
+		player.loadFiles(playerAtlas, bulletTexture);
 
 		player.setup(sf::Vector2f(0, 600), 3, 0.1f);
 
