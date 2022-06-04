@@ -1,13 +1,18 @@
 #include "Player.h"
 
-void Player::setup(sf::Vector2f positionPlayer, size_t hp, float speed)
+void Player::setup(sf::Vector2f positionPlayer, size_t hp, float speed,
+	std::filesystem::path pathPlayerAtlas, std::filesystem::path pathBulletTexture)
 {
 	this->positionPlayer = positionPlayer;
 	this->hp = hp;
 	this->speed = speed;
 	
+	loadFiles(pathPlayerAtlas, pathBulletTexture);
+
 	gun.setup("pistol", 170, 2500);
 	playerSprite.setPosition(positionPlayer.x, positionPlayer.y);
+
+
 }
 
 void Player::control(sf::RenderWindow& window)

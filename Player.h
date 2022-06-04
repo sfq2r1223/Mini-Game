@@ -12,7 +12,8 @@ public:
 	Player() = default;
 	~Player() = default;
 
-	void setup(sf::Vector2f positionPlayer, size_t hp, float speed);
+	void setup(sf::Vector2f positionPlayer, size_t hp, float speed,
+		std::filesystem::path pathPlayerAtlas, std::filesystem::path pathBulletTexture);
 	void loadFiles(std::filesystem::path playerAtlas, std::filesystem::path bulletTexture);
 
 	void control(sf::RenderWindow& window);
@@ -27,7 +28,6 @@ private:
 	Animation runRight;
 	Animation runLeft;
 	Animation stay;
-
 
 	sf::Sprite playerSprite;
 	sf::Texture playerTexture;

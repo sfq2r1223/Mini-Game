@@ -2,9 +2,16 @@
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
-
 #include <filesystem>
 #include <iostream>
+
+void eventHandling(sf::RenderWindow& window)
+{
+	sf::Event event;
+	while (window.pollEvent(event))
+		if (event.type == sf::Event::Closed)
+			window.close();
+}
 
 int main()
 {
@@ -17,16 +24,11 @@ int main()
 
 		Player player;
 
-		player.loadFiles(playerAtlas, bulletTexture);
-
-		player.setup(sf::Vector2f(0, 600), 3, 0.1f);
+		player.setup(sf::Vector2f(0, 600), 3, 0.1f, playerAtlas, bulletTexture);
 
 		while (window.isOpen())
 		{
-			sf::Event event;
-			while (window.pollEvent(event))
-				if (event.type == sf::Event::Closed)
-					window.close();
+			eventHandling(window);
 
 			window.clear(sf::Color::White);
 
