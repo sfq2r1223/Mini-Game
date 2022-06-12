@@ -10,22 +10,24 @@ void Bullet::setup(sf::Vector2f from, sf::Vector2f to, float speed)
 	this->from = from;
 	this->speed = speed;
 
+	lastLiveBullet = clock();
+
 	diraction = to - from;
 	const float length = sqrtf(diraction.x * diraction.x + diraction.y * diraction.y);
 	diraction /= length;
 
 	bulletSprite.setPosition(from);
 }
-void Bullet::update(size_t timeLiveBullet, std::vector<Bullet>& chamber) 
+void Bullet::update()
 {
-	from += diraction;
-	bulletSprite.setPosition(from);
-
-	//if (clock() - lastLiveBullet >= timeLiveBullet)
-	//	for (size_t i = 0; i < chamber.size() - sizeof(chamber.begin()); ++i)
-	//	{
-	//		chamber.erase(chamber.begin());
-	//	}
+	from += diraction / 10.f;
+	bulletSprite.setPosition(from);	
+}
+bool Bullet::isDelete() const noexcept
+{
+	if (clock() - lastLiveBullet >= timeLiveBullet)
+		return true;
+	return false;
 }
 void Bullet::draw(sf::RenderWindow& window)
 {

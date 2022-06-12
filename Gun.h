@@ -25,5 +25,5 @@ private:
 	size_t timeLiveBullet = 0;
 	size_t lastLiveBullet = 0;
 
-	std::vector<Bullet>  chamber;
+	std::vector<Bullet> chamber;
 };
