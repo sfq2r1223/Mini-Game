@@ -36,6 +36,6 @@ void Gun::update()
 }
 void Gun::draw(sf::RenderWindow& window)
 {
-	for (auto i : chamber)
+	for (auto& i : chamber)
 		i.draw(window);
 }
