@@ -10,7 +10,7 @@ public:
 	~Bullet() = default;
 
 	void setup(sf::Vector2f from, sf::Vector2f to, float speed);
-	void update(size_t timeLiveBullet, std::vector<Bullet>& magazine);
+	void update(size_t timeLiveBullet, std::vector<Bullet>& chamber);
 
 	void draw(sf::RenderWindow& window);
 	static void loadFiles(std::filesystem::path pathTexture);

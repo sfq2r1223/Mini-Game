@@ -25,11 +25,11 @@ void Gun::loadFiles(std::filesystem::path pathTexture)
 }
 void Gun::update()
 {
-	for (auto i : chamber )
+	for (auto& i : chamber )
 		i.update(timeLiveBullet, chamber);
 }
 void Gun::draw(sf::RenderWindow& window)
 {
-	for (auto i : chamber)
+	for (auto& i : chamber)
 		i.draw(window);
 }
