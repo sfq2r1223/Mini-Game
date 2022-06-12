@@ -20,7 +20,7 @@ void Bullet::setup(sf::Vector2f from, sf::Vector2f to, float speed)
 }
 void Bullet::update()
 {
-	from += diraction / 10.f;
+	from += diraction;
 	bulletSprite.setPosition(from);	
 }
 bool Bullet::isDelete() const noexcept
